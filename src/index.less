@@ -1,0 +1,73 @@
+@offset: 2px;
+
+:local(.style) {
+  overflow: scroll visible;
+  ul, li {
+    text-indent: 0;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    vertical-align: top;
+  }
+
+  .m-content {
+    position: relative;
+    padding: 0 28px 20px;
+  }
+
+  .u-line {
+    position: absolute;
+    width: 100%;
+    height: 0px;
+    border-bottom: 1px solid @border-color-split;
+  }
+
+  .u-vertical {
+    display: none;
+    position: absolute;
+    top: 0;
+    width: 1px;
+    height: 100%;
+    background: @border-color-split;
+    &-left {
+      left: 0;
+    }
+    &-right {
+      right: 0;
+    }
+  }
+
+  /* 串行子任务需要并列显示*/
+  .m-serial {
+    &>li {
+      display: inline-block;
+    }
+  }
+  /* 并联中每行需要展示左右下竖直线，排除最后一个元素 */
+  .m-parallel {
+    &>li {
+      &>.u-vertical {
+        display: inline-block;
+      }
+      &:last-child {
+        .u-vertical {
+          display: none;
+        }
+      }
+      &:first-child {
+        &>.u-vertical-left {
+          left: @offset;
+        }
+        &>.u-vertical-right {
+          right: @offset;
+        } 
+      }
+      & + li {
+        margin: 0 @offset;
+        .m-content {
+          transform: translateX(0 - @offset);
+        }
+      }
+    }
+  }
+}

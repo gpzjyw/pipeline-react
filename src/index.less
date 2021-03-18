@@ -1,13 +1,19 @@
 @offset: 2px;
+@border-color-split: #e4e7eb;
 
-:local(.style) {
+.pipeline-visual {
   overflow: scroll visible;
+  word-wrap: normal;
+  white-space: nowrap;
   ul, li {
     text-indent: 0;
     padding: 0;
     margin: 0;
     list-style: none;
     vertical-align: top;
+  }
+  li {
+    position: relative;
   }
 
   .m-content {

@@ -8,7 +8,7 @@ interface IPipelineProps<T> {
   subTasks: IOriginSubtask<T>[];
   className?: string;
   parallelAdd?: boolean;
-  render: (param: IOriginSubtask<T>) => React.ReactNode;
+  render: (param: T, key: string) => React.ReactNode;
   topOffset?: number;
 }
 
@@ -71,7 +71,7 @@ class Index<T = any> extends Component<IPipelineProps<T>> {
       <div className="u-vertical u-vertical-left" style={{ top: topOffset || 0 }} />
       <div className="u-vertical u-vertical-right" style={{ top: topOffset || 0 }} />
     </>);
-    return (<li className="f-pr">
+    return (<li>
       {Array.isArray(subtask) ? <>
         {Line}
         <ul className={classnames(isSerial ? 'm-serial' : 'm-parallel')}>
@@ -80,7 +80,7 @@ class Index<T = any> extends Component<IPipelineProps<T>> {
       </> : <>
         {Line}
         <div className="m-content">
-          {render ? render(subtask) : subtask.key}
+          {render(subtask.data, subtask.key)}
         </div>
       </>}
     </li>);
@@ -105,7 +105,10 @@ class Index<T = any> extends Component<IPipelineProps<T>> {
         流水线渲染异常：当前子任务中存在循环依赖
       </div>);
     } else {
-      return (<div className={classnames(className, 'f-wsn')}>
+      return (<div className={classnames(
+        'pipeline-visual',
+        className
+      )}>
         <ul className="m-serial">
           {this.traverseGraph(subTasks).map((subtask) => this.renderData(subtask, false))}
         </ul>

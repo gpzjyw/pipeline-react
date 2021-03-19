@@ -14,3 +14,7 @@ import Pipeline, { IOriginSubtask } from 'pipeline-react';
 ```
 
 ## a demo
+
+the code is show [here](https://github.com/gpzjyw/pipeline-react/blob/master/demo/demo1.tsx)
+
+![示例](https://raw.githubusercontent.com/gpzjyw/pipeline-react/master/demo.png)

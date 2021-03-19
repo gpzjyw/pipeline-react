@@ -4,6 +4,8 @@ import Graph from './util/Graph';
 import Node from './util/Node';
 import { IOriginSubtask, IRenderData, IRenderSubtask } from './interface';
 
+export { IOriginSubtask };
+
 interface IPipelineProps<T> {
   subTasks: IOriginSubtask<T>[];
   className?: string;
